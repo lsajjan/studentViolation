@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +19,10 @@
         <activity
             android:name=".CreatAccount"
             android:label="@string/title_activity_creat_account"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SecurityPerson"
+            android:label="@string/title_activity_security_person"
             android:theme="@style/AppTheme"></activity>
     </application>
 

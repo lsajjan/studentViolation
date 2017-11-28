@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">studentViolation</string>
     <string name="title_activity_creat_account">CreatAccount</string>
+    <string name="title_activity_security_person">SecurityPerson</string>
+    <string-array name="voilation_location">
+        <item>Class Room</item>
+        <item>Floor</item>
+        <item>Building</item>
+        <item>Hostel</item>
+        <item>Others</item>
+        </string-array>
+    <string-array name="voilation_Type">
+        <item>Dress Code</item>
+        <item>Littering</item>
+        <item>Parking Violation</item>
+        <item>Others</item>
+    </string-array>
 </resources>
