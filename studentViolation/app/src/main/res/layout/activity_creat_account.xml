@@ -5,135 +5,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffdd99"
-    tools:context="com.example.lingarajsajjan.studentviolation.CreatAccount">
+    tools:context="com.example.lingarajsajjan.studentviolation.CreatAccount"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:id="@+id/gra"
-        android:layout_width="111dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="99dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="190dp"
         android:gravity="left"
         android:text="Name"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/name"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="8dp"
+        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/userId"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="@+id/name"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginBottom="1dp" />
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="183dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColorLink="@android:color/black"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintLeft_toRightOf="@+id/gra"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_marginTop="16dp"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/userId"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/userId" />
+
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="106dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="119dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="41dp"
         android:gravity="left"
-        android:text="Email"
+        android:text="User Id"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userId"
-        tools:layout_constraintTop_creator="1" />
+        app:layout_constraintRight_toRightOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/userdob"
+        app:layout_constraintTop_toTopOf="@+id/gra" />
 
     <EditText
         android:id="@+id/userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="34dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColorLink="@android:color/white"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toRightOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-    <RadioButton
-        android:id="@+id/maleRbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="24dp"
-        android:text="Male"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <RadioButton
-        android:id="@+id/femaleRbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="52dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
-        android:text="Female"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toRightOf="@+id/maleRbtn"
-        app:layout_constraintTop_toBottomOf="@+id/userdob" />
+        android:layout_marginLeft="13dp" />
 
     <EditText
         android:id="@+id/userdob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="date"
         android:textColorLink="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/textView7"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/userId"
         app:layout_constraintTop_toBottomOf="@+id/userId"
-        app:layout_constraintVertical_bias="0.124" />
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/userId"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="116dp"
-        android:layout_height="28dp"
-        android:layout_marginLeft="0dp"
+        android:layout_width="105dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
         android:gravity="left"
         android:text="DOB"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/userId"
+        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.113" />
+        android:layout_marginLeft="10dp" />
 
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="59dp"
         android:shadowColor="@android:color/holo_blue_light"
-        android:text="Submit"
-        app:layout_constraintRight_toRightOf="@+id/femaleRbtn"
-        app:layout_constraintTop_toBottomOf="@+id/femaleRbtn"
-        tools:layout_constraintRight_creator="1" />
+        android:text="Create"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userType" />
+
+    <TextView
+        android:id="@+id/userTypetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="User Type"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <RadioGroup
+        android:layout_width="201dp"
+        android:layout_height="54dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:weightSum="1"
+        android:id="@+id/radioGroup"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/radioGroup1"
+            android:layout_below="@+id/radioGroup1"
+            android:layout_weight="0.77"
+            android:text="Female" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/userType"
+        android:layout_width="232dp"
+        android:layout_height="44dp"
+        android:layout_marginLeft="73dp"
+        android:layout_marginStart="73dp"
+        android:background="@android:color/holo_orange_light"
+        android:entries="@array/user_Type"
+        app:layout_constraintLeft_toRightOf="@+id/userTypetxt"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
 </android.support.constraint.ConstraintLayout>

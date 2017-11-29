@@ -15,4 +15,9 @@
         <item>Parking Violation</item>
         <item>Others</item>
     </string-array>
+    <string-array name="user_Type">
+        <item>Student</item>
+        <item>Security</item>
+        <item>Others</item>
+    </string-array>
 </resources>
