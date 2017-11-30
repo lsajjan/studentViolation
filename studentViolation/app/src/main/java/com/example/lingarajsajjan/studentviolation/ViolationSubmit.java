@@ -13,8 +13,8 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.util.Date;
 public class ViolationSubmit extends AppCompatActivity {
-    TextView showTimeStamp;
-    EditText stdName,stdId,currentLocation,currentDate,violationDes;
+    TextView showTimeStamp,currentLocation;
+    EditText stdName,stdId,currentDate,violationDes;
     Button submitviolation;
     Button getlocationPage;
 
@@ -27,12 +27,13 @@ public class ViolationSubmit extends AppCompatActivity {
         final Context context=ViolationSubmit.this;
         stdName=(EditText)findViewById(R.id.textInputEditTextStdName);
         stdId=(EditText)findViewById(R.id.textInputEditTextStdId);
-        //currentLocation=(EditText)findViewById(R.id.textInputEditTextLocation);
+        currentLocation=(TextView)findViewById(R.id.locationTxt);
         currentDate=(EditText)findViewById(R.id.storeDateTime);
         violationDes=(EditText)findViewById(R.id.violation_descriptiontxt);
         submitviolation=(Button)findViewById(R.id.appCompatButtonRegisterViolation);
         getlocationPage=(Button)findViewById(R.id.getlocationBtn);
 
+        currentLocation.setText(getIntent().getStringExtra("Currentlocation"));
         getlocationPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,5 +1,6 @@
 package com.example.lingarajsajjan.studentviolation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Location;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 public class MyLocationUsingHelper extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener,OnRequestPermissionsResultCallback {
 
-
+Context context=MyLocationUsingHelper.this;
     @BindView(R.id.btnLocation)Button btnProceed;
     @BindView(R.id.tvAddress)TextView tvAddress;
     @BindView(R.id.tvEmpty)TextView tvEmpty;
@@ -78,6 +79,10 @@ public class MyLocationUsingHelper extends AppCompatActivity implements Connecti
             @Override
             public void onClick(View view) {
                 showToast("Proceed to the next step");
+               String locationData= tvAddress.getText().toString().trim();
+                Intent goBackViolationPage=new Intent(context,ViolationSubmit.class);
+                goBackViolationPage.putExtra("Currentlocation",locationData);
+                startActivity(goBackViolationPage);
             }
         });
 
