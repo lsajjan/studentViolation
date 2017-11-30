@@ -2,6 +2,8 @@ package com.example.lingarajsajjan.studentviolation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import java.util.Date;
 public class ViolationSubmit extends AppCompatActivity {
     TextView showTimeStamp;
     EditText stdName,stdId,currentLocation,currentDate,violationDes;
+    Button submitviolation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +26,17 @@ public class ViolationSubmit extends AppCompatActivity {
         currentLocation=(EditText)findViewById(R.id.textInputEditTextLocation);
         currentDate=(EditText)findViewById(R.id.storeDateTime);
         violationDes=(EditText)findViewById(R.id.violation_descriptiontxt);
+        submitviolation=(Button)findViewById(R.id.appCompatButtonRegisterViolation);
 
+        submitviolation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputValidViolationSubmit();
+            }
+        });
 
         getCurrentDate();
-        inputValidViolationSubmit()
+
         String dateStr = "04/05/2010";
 
        // Toast.makeText(this,currentDateTimeString,Toast.LENGTH_LONG).show();
@@ -51,6 +61,10 @@ public class ViolationSubmit extends AppCompatActivity {
         }
         else if (stdlocation.isEmpty()){
             Toast.makeText(this,"Voilation location is missing",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this,"Success",Toast.LENGTH_LONG).show();
+
         }
     }
 
