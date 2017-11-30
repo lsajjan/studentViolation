@@ -51,22 +51,22 @@
                 android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@android:color/white"
-            android:layout_marginTop="10dp">
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:id="@+id/textInputLocation"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColorHint="@android:color/white"-->
+            <!--android:layout_marginTop="10dp">-->
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Get current Location"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@android:color/white" />
-        </android.support.design.widget.TextInputLayout>
+            <!--<android.support.design.widget.TextInputEditText-->
+                <!--android:id="@+id/textInputEditTextLocation"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Get current Location"-->
+                <!--android:inputType="text"-->
+                <!--android:maxLines="1"-->
+                <!--android:textColor="@android:color/white" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layoutstoreDateTime"
             android:layout_width="match_parent"
@@ -83,7 +83,21 @@
                 android:textColor="@android:color/white" />
             </android.support.design.widget.TextInputLayout>
 
-
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/getlocationBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorTextHint"
+            android:text="Get Current Location" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTxt"
+            android:textColor="@android:color/white"
+            android:inputType="text"
+            android:maxLines="4"
+            />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/violation_type"

@@ -23,7 +23,7 @@ public class ViolationSubmit extends AppCompatActivity {
 
         stdName=(EditText)findViewById(R.id.textInputEditTextStdName);
         stdId=(EditText)findViewById(R.id.textInputEditTextStdId);
-        currentLocation=(EditText)findViewById(R.id.textInputEditTextLocation);
+        //currentLocation=(EditText)findViewById(R.id.textInputEditTextLocation);
         currentDate=(EditText)findViewById(R.id.storeDateTime);
         violationDes=(EditText)findViewById(R.id.violation_descriptiontxt);
         submitviolation=(Button)findViewById(R.id.appCompatButtonRegisterViolation);
@@ -51,7 +51,7 @@ public class ViolationSubmit extends AppCompatActivity {
         String stdname,stdid,stdlocation;
         stdname=stdName.getText().toString().trim();
         stdid=stdId.getText().toString().trim();
-        stdlocation=currentLocation.getText().toString().trim();
+       // stdlocation=currentLocation.getText().toString().trim();
 
         if (stdname.isEmpty()){
             Toast.makeText(this,"Student name is missing",Toast.LENGTH_LONG).show();
@@ -59,9 +59,7 @@ public class ViolationSubmit extends AppCompatActivity {
         else if (stdid.isEmpty()){
             Toast.makeText(this,"Student Id is missing",Toast.LENGTH_LONG).show();
         }
-        else if (stdlocation.isEmpty()){
-            Toast.makeText(this,"Voilation location is missing",Toast.LENGTH_LONG).show();
-        }
+
         else {
             Toast.makeText(this,"Success",Toast.LENGTH_LONG).show();
 
