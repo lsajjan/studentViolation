@@ -45,5 +45,8 @@
     <string name="violation_submit">Submit Violation</string>
     <string name="view_profile">View/Edit Profile</string>
     <string name="view_violationList">View Violation List</string>
+
+
+    <string name="quotedesc">Find Student Violation current Loation</string>
 </resources>
 

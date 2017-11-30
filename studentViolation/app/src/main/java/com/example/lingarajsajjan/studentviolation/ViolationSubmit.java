@@ -1,5 +1,7 @@
 package com.example.lingarajsajjan.studentviolation;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +16,7 @@ public class ViolationSubmit extends AppCompatActivity {
     TextView showTimeStamp;
     EditText stdName,stdId,currentLocation,currentDate,violationDes;
     Button submitviolation;
+    Button getlocationPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +24,23 @@ public class ViolationSubmit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_violation_submit);
 
+        final Context context=ViolationSubmit.this;
         stdName=(EditText)findViewById(R.id.textInputEditTextStdName);
         stdId=(EditText)findViewById(R.id.textInputEditTextStdId);
         //currentLocation=(EditText)findViewById(R.id.textInputEditTextLocation);
         currentDate=(EditText)findViewById(R.id.storeDateTime);
         violationDes=(EditText)findViewById(R.id.violation_descriptiontxt);
         submitviolation=(Button)findViewById(R.id.appCompatButtonRegisterViolation);
+        getlocationPage=(Button)findViewById(R.id.getlocationBtn);
+
+        getlocationPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent locationPage=new Intent(context,MyLocationUsingHelper.class);
+                startActivity(locationPage);
+            }
+        });
 
         submitviolation.setOnClickListener(new View.OnClickListener() {
             @Override
