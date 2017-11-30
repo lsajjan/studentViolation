@@ -1,16 +1,17 @@
 package com.example.lingarajsajjan.studentviolation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,30 +23,45 @@ public class CreatAccount extends AppCompatActivity {
     EditText userid ;
     EditText userdob;
     RadioGroup gender;
+   TextView loginbk;
 
     ListView userType;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Context context=CreatAccount.this;
         setContentView(R.layout.activity_creat_account);
+        loginbk=(TextView)findViewById(R.id.appCompatTextViewLoginLink);
 
-        username=(EditText)findViewById(R.id.name);
-        userid =(EditText)findViewById(R.id.userId);
-        userdob=(EditText)findViewById(R.id.userdob);
-        gender=(RadioGroup)findViewById(R.id.radioGroup);
-        userType=(ListView)findViewById(R.id.userType);
-
-        Button submit=(Button)findViewById(R.id.submitBtn);
-
-        submit.setOnClickListener(new View.OnClickListener() {
+        loginbk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent loginpage=new Intent(context, MainActivity.class);
 
-                DbCreate();
-                SaveUserInfo();
+                startActivity(loginpage);
+
             }
         });
+
+
+
+//        username=(EditText)findViewById(R.id.name);
+//        userid =(EditText)findViewById(R.id.userId);
+//        userdob=(EditText)findViewById(R.id.userdob);
+//        gender=(RadioGroup)findViewById(R.id.radioGroup);
+//        userType=(ListView)findViewById(R.id.userType);
+//
+//        Button submit=(Button)findViewById(R.id.submitBtn);
+
+//        submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                DbCreate();
+//                SaveUserInfo();
+//            }
+//        });
 
 
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

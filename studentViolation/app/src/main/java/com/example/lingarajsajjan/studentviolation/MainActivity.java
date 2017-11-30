@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,22 +15,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Context context=MainActivity.this;
-        TextView textView=(TextView)findViewById(R.id.createAccoutTxt);
-        Button loginbutton=(Button)findViewById(R.id.loginBtn);
+       // TextView textView=(TextView)findViewById(R.id.textInputEditTextEmail);
+        AppCompatTextView textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
+        Button loginbutton=(Button)findViewById(R.id.ButtonLogin);
+
 
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent voilationPage=new Intent(context,SecurityPerson.class);
+                Intent voilationPage=new Intent(context,DashboardOptions.class);
                 startActivity(voilationPage);
             }
         });
-        textView.setOnClickListener(new View.OnClickListener() {
+
+        textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               // Class createAccout= new Class();
-               // Toast.makeText(context,"next page",Toast.LENGTH_SHORT).show();
                 Intent createAccount=new Intent(context,CreatAccount.class);
                 startActivity(createAccount);
             }
