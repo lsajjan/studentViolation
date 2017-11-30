@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,11 +23,15 @@ public class CreatAccount extends AppCompatActivity {
 
     EditText username;
     EditText userid ;
-    EditText userdob;
+    EditText pwd;
     RadioGroup gender;
-   TextView loginbk;
+    TextView loginbk;
+    Button submitViolation;
+    boolean isemptyCheck=false;
 
-    ListView userType;
+    RadioGroup ganarGroup;
+    RadioGroup userType;
+    RadioButton male;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,30 @@ public class CreatAccount extends AppCompatActivity {
         final Context context=CreatAccount.this;
         setContentView(R.layout.activity_creat_account);
         loginbk=(TextView)findViewById(R.id.appCompatTextViewLoginLink);
+        submitViolation=(Button)findViewById(R.id.appCompatButtonRegister);
+        userType=(RadioGroup)findViewById(R.id.RadioBtnUserTypeGroup);
+        ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
+        male=(RadioButton)findViewById(R.id.RadioBtnmale);
 
+        username=(EditText)findViewById(R.id.textInputEditTextName);
+        userid=(EditText)findViewById(R.id.textInputEditTextEmail);
+        pwd=(EditText)findViewById(R.id.textInputEditTextPassword);
+
+
+        submitViolation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                inputValidattionNewUser();
+//                if (isemptyCheck==true){
+//                    Toast.makeText(context, "Success",Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    Toast.makeText(context, "fields are missing",Toast.LENGTH_SHORT).show();
+//                }
+
+            }
+        });
         loginbk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +105,32 @@ public class CreatAccount extends AppCompatActivity {
 //            }
 //        });
     }
+
+    private void inputValidattionNewUser() {
+
+        String gendarmale=male.getText().toString().trim();
+        String uname=username.getText().toString().trim();
+        String uemail=userid.getText().toString().trim();
+        String upwd=pwd.getText().toString().trim();
+        //Toast.makeText(this,gendarmale,Toast.LENGTH_LONG).show();
+
+        if (uname.isEmpty())
+        {
+            Toast.makeText(this,"User Name is Missing",Toast.LENGTH_LONG).show();
+        }
+        else if (uemail.isEmpty()){
+            Toast.makeText(this,"Email id is Missing",Toast.LENGTH_LONG).show();
+        }
+        else if (upwd.isEmpty()){
+            Toast.makeText(this,"User Password is Missing",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this,"Saved Success ",Toast.LENGTH_LONG).show();
+        }
+
+       // return isemptyCheck;
+    }
+
     public void DbCreate(){
        // Context context=MainActivity.this;
         db = openOrCreateDatabase("CollegeViolation", Context.MODE_PRIVATE, null);
@@ -86,7 +141,7 @@ public class CreatAccount extends AppCompatActivity {
 
         String name=username.getText().toString();
         String id=userid.getText().toString();
-        String dob=userdob.getText().toString();
+        String dob=userid.getText().toString();
        // int selected=RadioGroup.getCheckedRadioButtonId();
         //RadioButton gender=(RadioButton)findViewById(selected);
         //RadioButton gender=(RadioButton)findViewById(selected);

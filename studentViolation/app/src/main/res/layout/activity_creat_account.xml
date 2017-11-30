@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="20dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/textInputEditTextName"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/textInputEditTextEmail"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/textInputEditTextPassword"
@@ -71,27 +71,27 @@
             android:id="@+id/gendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:text="Gendar"
             android:textSize="16dp" />
         <RadioGroup
-            android:id="@+id/radioGroupShippingMethod"
+            android:id="@+id/RadioBtnGanerGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="15dp">
 
             <RadioButton
-                android:id="@+id/normalDeliveryRadioButton"
+                android:id="@+id/RadioBtnmale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male"
                 android:textColor="@android:color/white"
                 android:checked="true"/>
             <RadioButton
-                android:id="@+id/expressDeliveryRadioButton"
+                android:id="@+id/RadioBtnfemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -109,21 +109,21 @@
             android:text="Select User Type"
             android:textSize="16dp" />
         <RadioGroup
-            android:id="@+id/radioGroupUserType"
+            android:id="@+id/RadioBtnUserTypeGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="15dp">
 
             <RadioButton
-                android:id="@+id/student"
+                android:id="@+id/RadioBtnstudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Student"
                 android:textColor="@android:color/white"
                 android:checked="true"/>
             <RadioButton
-                android:id="@+id/security"
+                android:id="@+id/RadioBtnsecurity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
