@@ -36,6 +36,9 @@
         <activity android:name=".MyLocationUsingLocationAPI">
 
         </activity>
+        <activity
+            android:name=".ViolationListActivity"
+            android:screenOrientation="portrait" />
 
 
 

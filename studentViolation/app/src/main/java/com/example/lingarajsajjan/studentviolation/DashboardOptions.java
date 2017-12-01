@@ -9,20 +9,28 @@ import android.widget.Button;
 
 public class DashboardOptions extends AppCompatActivity {
 
-    Button submitViolation;
+    Button submitViolation,viewViolation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Context contex=DashboardOptions.this;
         setContentView(R.layout.activity_dashboard_options);
-
+        final Context context=DashboardOptions.this;
         submitViolation=(Button)findViewById(R.id.submitViolation);
+        viewViolation=(Button)findViewById(R.id.view_violation) ;
 
         submitViolation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent gotoViolationSubmit=new Intent(contex,ViolationSubmit.class);
                 startActivity(gotoViolationSubmit);
+            }
+        });
+        viewViolation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent accountsIntent = new Intent(context, ViolationListActivity.class);
+                startActivity(accountsIntent);
             }
         });
     }

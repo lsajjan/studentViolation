@@ -132,17 +132,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<ViolationRegister> violationList = new ArrayList<ViolationRegister>();
 
         SQLiteDatabase db = this.getReadableDatabase();
+        //SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery="select * from violation_table";
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.query(TABLE_VIOLATION, //Table to query
-                columns,    //columns to return
-                null,        //columns for the WHERE clause
-                null,        //The values for the WHERE clause
-                null,       //group the rows
-                null,       //filter by row groups
-                sortOrder); //The sort order
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-
+                //labels.add(cursor.getString(1));
+                //violationList.add(cursor.getString(cursor.getColumnIndex()));
                 ViolationRegister violation=new ViolationRegister();
                 violation.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SQL_USER_ID))));
                 violation.setStdId(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_ID)));
@@ -155,6 +153,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 violationList.add(violation);
             } while (cursor.moveToNext());
         }
+
+//        Cursor cursor = db.query(TABLE_VIOLATION, //Table to query
+//                columns,    //columns to return
+//                null,        //columns for the WHERE clause
+//                null,        //The values for the WHERE clause
+//                null,       //group the rows
+//                null,       //filter by row groups
+//                sortOrder); //The sort order
+//        if (cursor.moveToFirst()) {
+//            do {
+//
+//                ViolationRegister violation=new ViolationRegister();
+//                violation.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SQL_USER_ID))));
+//                violation.setStdId(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_ID)));
+//                violation.setStdName(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_NAME)));
+//                violation.setViolationDate(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DATE)));
+//                violation.setViolationLocation(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LOCATION)));
+//                violation.setViolationType(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LIST)));
+//                violation.setViolationDescription(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DESCRP)));
+//                // Adding user record to list
+//                violationList.add(violation);
+//            } while (cursor.moveToNext());
+       // }
         cursor.close();
         db.close();
 
