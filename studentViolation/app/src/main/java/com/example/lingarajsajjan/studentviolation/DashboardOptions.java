@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class DashboardOptions extends AppCompatActivity {
 
-    Button submitViolation,viewViolation;
+    Button submitViolation,viewViolation,viewUserProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,7 @@ public class DashboardOptions extends AppCompatActivity {
         final Context context=DashboardOptions.this;
         submitViolation=(Button)findViewById(R.id.submitViolation);
         viewViolation=(Button)findViewById(R.id.view_violation) ;
-
+        viewUserProfile=(Button)findViewById(R.id.viewProfile);
         submitViolation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,6 +31,13 @@ public class DashboardOptions extends AppCompatActivity {
             public void onClick(View view) {
                 Intent accountsIntent = new Intent(context, ViolationListActivity.class);
                 startActivity(accountsIntent);
+            }
+        });
+        viewUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent userProfile=new Intent(context,UserProfileView.class);
+                startActivity(userProfile);
             }
         });
     }

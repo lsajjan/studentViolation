@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lingarajsajjan.studentviolation">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -26,22 +27,19 @@
             android:label="@string/title_activity_creat_account"
             android:theme="@style/AppTheme" />
         <activity android:name=".DashboardOptions" />
-        <activity android:name=".ViolationSubmit"></activity>
+        <activity android:name=".ViolationSubmit" />
         <activity
             android:name=".MyLocationUsingHelper"
             android:label="MyLocation"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".MyLocationUsingLocationAPI">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MyLocationUsingLocationAPI"></activity>
         <activity
             android:name=".ViolationListActivity"
             android:screenOrientation="portrait" />
-
-
-
+        <activity
+            android:name=".UserProfileView"
+            android:label="@string/title_activity_user_profile_view"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

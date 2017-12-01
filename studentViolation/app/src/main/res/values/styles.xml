@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
 
 
-
         <item name="actionBarStyle">@style/MyActionBar</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/colorWhite</item>

@@ -154,28 +154,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-//        Cursor cursor = db.query(TABLE_VIOLATION, //Table to query
-//                columns,    //columns to return
-//                null,        //columns for the WHERE clause
-//                null,        //The values for the WHERE clause
-//                null,       //group the rows
-//                null,       //filter by row groups
-//                sortOrder); //The sort order
-//        if (cursor.moveToFirst()) {
-//            do {
-//
-//                ViolationRegister violation=new ViolationRegister();
-//                violation.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SQL_USER_ID))));
-//                violation.setStdId(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_ID)));
-//                violation.setStdName(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_NAME)));
-//                violation.setViolationDate(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DATE)));
-//                violation.setViolationLocation(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LOCATION)));
-//                violation.setViolationType(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LIST)));
-//                violation.setViolationDescription(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DESCRP)));
-//                // Adding user record to list
-//                violationList.add(violation);
-//            } while (cursor.moveToNext());
-       // }
         cursor.close();
         db.close();
 
@@ -246,8 +224,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * This method is to fetch all user and return the list of user records
      *
      * @return list
+     * @param stdId
      */
-    public List<UserCreation> getAllUser() {
+    public List<UserCreation> getAllUser(String stdId) {
         // array of columns to fetch
         String[] columns = {
                 COLUMN_USER_ID,
@@ -258,6 +237,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_TYPE
         };
         // sorting orders
+        String selection = COLUMN_USER_EMAIL + " = ?";
+        String[] selectionArgs = {stdId};
         String sortOrder =
                 COLUMN_USER_NAME + " ASC";
         List<UserCreation> userList = new ArrayList<UserCreation>();
@@ -272,10 +253,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
          */
         Cursor cursor = db.query(TABLE_USERTABLE, //Table to query
                 columns,    //columns to return
-                null,        //columns for the WHERE clause
-                null,        //The values for the WHERE clause
+                selection,                  //columns for the WHERE clause
+                selectionArgs,         //The values for the WHERE clause
                 null,       //group the rows
-                null,       //filter by row groups
+                null,//filter by row groups
                 sortOrder); //The sort order
 
 
@@ -283,7 +264,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 UserCreation user = new UserCreation();
+
                 user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+                user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
+                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
+                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                //user.setGendar(cursor.getString(cursor.getColumnIndex(COLUMN_USER_GANDER)));
+                user.setUserType(cursor.getString(cursor.getColumnIndex(COLUMN_USER_TYPE)));
+                // Adding user record to list
+                userList.add(user);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        // return user list
+        return userList;
+    }
+//get particulat user recodr
+
+    public List<UserCreation> getUserDetail(String user_email) {
+        //Cursor cursor = null;
+        List<UserCreation> userList = new ArrayList<UserCreation>();
+
+        UserCreation user = new UserCreation();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery="SELECT user_name FROM userTable WHERE user_email=?";
+        //cursor = db.rawQuery(, new String[] {user_email + ""});
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {user_email + ""});
+        // user_email="ss";
+        String empName = "";
+
+        if (cursor.moveToFirst()&&cursor.getCount()>0 && cursor!=null) {
+            do {
+                //user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
                 user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
                 user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));

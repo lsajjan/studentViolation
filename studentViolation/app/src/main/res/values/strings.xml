@@ -43,5 +43,6 @@
 
 
     <string name="quotedesc">Find Student Violation current Loation</string>
+    <string name="title_activity_user_profile_view">UserProfileView</string>
 </resources>
 
