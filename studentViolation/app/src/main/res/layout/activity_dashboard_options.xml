@@ -15,6 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp">
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/welcomeTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16dp" />
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/submitViolation"
             android:layout_width="match_parent"

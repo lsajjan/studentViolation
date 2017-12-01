@@ -151,7 +151,7 @@ Context context=MyLocationUsingHelper.this;
 
         }
         else
-            showToast("Something went wrong");
+            showToast("Something went wrong check Internet ");
     }
 
 

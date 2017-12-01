@@ -2,14 +2,17 @@ package com.example.lingarajsajjan.studentviolation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Button;
 
 public class DashboardOptions extends AppCompatActivity {
 
     Button submitViolation,viewViolation,viewUserProfile;
+    AppCompatTextView welcomeTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,11 @@ public class DashboardOptions extends AppCompatActivity {
         submitViolation=(Button)findViewById(R.id.submitViolation);
         viewViolation=(Button)findViewById(R.id.view_violation) ;
         viewUserProfile=(Button)findViewById(R.id.viewProfile);
+        welcomeTxt=(AppCompatTextView)findViewById(R.id.welcomeTxt);
+        Bundle extras = getIntent().getExtras();
+        final String newString= extras.getString("welcomeTxt").trim();
+
+        welcomeTxt.setText("Hi "+newString+" Welcome");
         submitViolation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +45,7 @@ public class DashboardOptions extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent userProfile=new Intent(context,UserProfileView.class);
+                userProfile.putExtra("stdId",newString);
                 startActivity(userProfile);
             }
         });

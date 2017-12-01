@@ -1,16 +1,17 @@
 package com.example.lingarajsajjan.studentviolation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
@@ -25,7 +26,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
     EditText userid ;
     EditText pwd;
     RadioGroup gender;
-    TextView loginbk;
+    AppCompatTextView appCompatTextViewLoginLink;
     Button appCompatButtonRegister;
     boolean isemptyCheck=false;
     private DatabaseHelper databaseHelper;
@@ -41,8 +42,9 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         final Context context=CreatAccount.this;
         setContentView(R.layout.activity_creat_account);
         //getSupportActionBar().hide();
-        loginbk=(TextView)findViewById(R.id.appCompatTextViewLoginLink);
+        appCompatTextViewLoginLink=(AppCompatTextView)findViewById(R.id.appCompatTextViewLoginLink);
         appCompatButtonRegister=(Button)findViewById(R.id.appCompatButtonRegister);
+       // appCompatTextViewLoginLink=(Button)findViewById(R.id.appCompatTextViewLoginLink);
         userType=(RadioGroup)findViewById(R.id.RadioBtnUserTypeGroup);
         ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
         user =new UserCreation();
@@ -60,26 +62,30 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         userRadioBtn = (RadioButton) findViewById(selectedUserId);
         ganderRadioBtn=(RadioButton)findViewById(selectedganderId);
 
-        initListeners();
+        //initListeners();
+        //Intent loginBk=new Intent(activity,MainActivity.class);
+        //startActivity(loginBk);
 
 
-//        submitViolation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                inputValidattionNewUser();
-//
-//            }
-//        });
-//        loginbk.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent loginpage=new Intent(context, MainActivity.class);
-//
-//                startActivity(loginpage);
-//
-//            }
-//        });
+
+        appCompatButtonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                inputValidattionNewUser();
+
+            }
+        });
+        appCompatTextViewLoginLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent loginpage=new Intent(context, MainActivity.class);
+
+                startActivity(loginpage);
+
+            }
+        });
 
     }
 
@@ -146,13 +152,13 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
 
 
         appCompatButtonRegister.setOnClickListener(this);
-
+        //appCompatTextViewLoginLink.setOnClickListener(this);
 
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View v) {
+        switch (v.getId()) {
 
             case R.id.appCompatButtonRegister:
                 //Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show();
@@ -160,7 +166,10 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
                 break;
 
 //            case R.id.appCompatTextViewLoginLink:
+////                Intent loginBk=new Intent(activity,MainActivity.class);
+////                startActivity(loginBk);
 //                finish();
+//
 //                break;
         }
     }

@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private final AppCompatActivity activity = MainActivity.this;
     TextInputEditText email,pwd;
     boolean inputEmpty=false;
-    //TextInputLayout txtinputEmailLayout;
+
+    AppCompatTextView textViewLinkRegister;
     private DatabaseHelper databaseHelper;
     private UserCreation user;
     @Override
@@ -27,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
         final Context context=MainActivity.this;
 
        // TextView textView=(TextView)findViewById(R.id.textInputEditTextEmail);
-        AppCompatTextView textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
+        textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         Button loginbutton=(Button)findViewById(R.id.ButtonLogin);
-        //txtinputEmailLayout=(TextInputLayout)findViewById(R.id.textInputLayoutEmail);
         user=new UserCreation();
         databaseHelper=new DatabaseHelper(activity);
         email=(TextInputEditText)findViewById(R.id.textInputEditTextEmail);
@@ -38,13 +38,9 @@ public class MainActivity extends AppCompatActivity {
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //if(inputEmpty==true)
-
-
                 inputValidationLogin();
                 if (inputEmpty==true){
-                    Intent voilationPage=new Intent(context,DashboardOptions.class);
+                    Intent dashboardPage=new Intent(context,DashboardOptions.class);
                     email=(TextInputEditText)findViewById(R.id.textInputEditTextEmail);
                     pwd=(TextInputEditText)findViewById(R.id.textInputEditTextPassword);
 
@@ -53,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     if(databaseHelper.checkUser(validEmail,validPwd)){
 
                         emptyInputEditText();
-                        startActivity(voilationPage);
+                        dashboardPage.putExtra("welcomeTxt",validEmail);
+                        startActivity(dashboardPage);
 
                     }
                      else
