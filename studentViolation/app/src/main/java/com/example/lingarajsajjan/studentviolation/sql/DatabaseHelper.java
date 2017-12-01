@@ -12,9 +12,6 @@ import com.example.lingarajsajjan.studentviolation.model.UserCreation;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lalit on 9/12/2016.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
@@ -25,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // User table name
     private static final String TABLE_USER = "user";
+    private static final String TABLE_USERTABLE = "userTable";
 
     // User Table Columns names
     private static final String COLUMN_USER_ID = "user_id";
@@ -35,13 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_TYPE="user_type";
 
 
-    // create table sql query
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT," +COLUMN_USER_GANDER+"TEXT,"+COLUMN_USER_TYPE+"TEXT" +" )";
+    // create table sql quer
+    private String CREATE_USER_TABLE_NEW = "CREATE TABLE " + TABLE_USERTABLE + "("
+            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " VARCHAR(25) NOT NULL,"
+            + COLUMN_USER_EMAIL + " VARCHAR(25) NOT NULL," + COLUMN_USER_PASSWORD + " VARCHAR(25) NOT NULL,"
+            +COLUMN_USER_TYPE+" VARCHAR(25) NOT NULL"+" )";
 
     // drop table sql query
-    private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+    private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USERTABLE;
 
     /**
      * Constructor
@@ -54,15 +53,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_USER_TABLE);
+
+        db.execSQL(CREATE_USER_TABLE_NEW);
     }
 
-
+//public void createTable(SQLiteDatabase db){
+//    db.execSQL(CREATE_USER_TABLE);
+//}
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //Drop User Table if exist
-        db.execSQL(DROP_USER_TABLE);
+        db.execSQL(TABLE_USER);
 
         // Create tables again
         onCreate(db);
@@ -81,11 +83,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
-        values.put(COLUMN_USER_GANDER,user.getGendar());
+        //values.put(COLUMN_USER_GANDER,user.getGendar());
         values.put(COLUMN_USER_TYPE,user.getUserType());
 
         // Inserting Row
-        db.insert(TABLE_USER, null, values);
+
+        db.insert(TABLE_USERTABLE, null, values);
         db.close();
     }
 
@@ -101,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_EMAIL,
                 COLUMN_USER_NAME,
                 COLUMN_USER_PASSWORD,
-                COLUMN_USER_GANDER,
+                //COLUMN_USER_GANDER,
                 COLUMN_USER_TYPE
         };
         // sorting orders
@@ -117,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
          * SQL query equivalent to this query function is
          * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
          */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
+        Cursor cursor = db.query(TABLE_USERTABLE, //Table to query
                 columns,    //columns to return
                 null,        //columns for the WHERE clause
                 null,        //The values for the WHERE clause
@@ -131,9 +134,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 UserCreation user = new UserCreation();
                 user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
-                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
+                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
                 user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                //user.setGendar(cursor.getString(cursor.getColumnIndex(COLUMN_USER_GANDER)));
+                user.setUserType(cursor.getString(cursor.getColumnIndex(COLUMN_USER_TYPE)));
                 // Adding user record to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -157,11 +162,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        //values.put(COLUMN_USER_GANDER,user.getGendar());
         values.put(COLUMN_USER_TYPE,user.getUserType());
-        values.put(COLUMN_USER_GANDER,user.getGendar());
+
 
         // updating row
-        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
+        db.update(TABLE_USERTABLE, values, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
@@ -174,7 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteUser(UserCreation user) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete user record by id
-        db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
+        db.delete(TABLE_USERTABLE, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
@@ -205,7 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
          * SQL query equivalent to this query function is
          * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
          */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
+        Cursor cursor = db.query(TABLE_USERTABLE, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause
                 selectionArgs,              //The values for the WHERE clause
@@ -249,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
          * SQL query equivalent to this query function is
          * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
          */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
+        Cursor cursor = db.query(TABLE_USERTABLE, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause
                 selectionArgs,              //The values for the WHERE clause

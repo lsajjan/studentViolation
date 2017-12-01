@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -12,14 +11,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
-
 import com.example.lingarajsajjan.studentviolation.sql.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
-
+    private final AppCompatActivity activity = MainActivity.this;
     TextInputEditText email,pwd;
     boolean inputEmpty=false;
-    TextInputLayout txtinputEmailLayout;
+    //TextInputLayout txtinputEmailLayout;
     private DatabaseHelper databaseHelper;
     private UserCreation user;
     @Override
@@ -31,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
        // TextView textView=(TextView)findViewById(R.id.textInputEditTextEmail);
         AppCompatTextView textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         Button loginbutton=(Button)findViewById(R.id.ButtonLogin);
-        txtinputEmailLayout=(TextInputLayout)findViewById(R.id.textInputLayoutEmail);
+        //txtinputEmailLayout=(TextInputLayout)findViewById(R.id.textInputLayoutEmail);
+        user=new UserCreation();
+        databaseHelper=new DatabaseHelper(activity);
+        email=(TextInputEditText)findViewById(R.id.textInputEditTextEmail);
+        pwd=(TextInputEditText)findViewById(R.id.textInputEditTextPassword);
 
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +45,22 @@ public class MainActivity extends AppCompatActivity {
                 inputValidationLogin();
                 if (inputEmpty==true){
                     Intent voilationPage=new Intent(context,DashboardOptions.class);
-                    startActivity(voilationPage);
+                    email=(TextInputEditText)findViewById(R.id.textInputEditTextEmail);
+                    pwd=(TextInputEditText)findViewById(R.id.textInputEditTextPassword);
+
+                    String validEmail=email.getText().toString().trim();
+                    String validPwd=pwd.getText().toString().trim();
+                    if(databaseHelper.checkUser(validEmail,validPwd)){
+
+                        emptyInputEditText();
+                        startActivity(voilationPage);
+
+                    }
+                     else
+                    {
+                        Toast.makeText(context,"user not found",Toast.LENGTH_LONG).show();
+                    }
+
                 }
                 else {
                     Toast.makeText(context,"Email or Password is missing",Toast.LENGTH_LONG).show();
@@ -61,9 +78,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void emptyInputEditText() {
+        email.setText(null);
+        pwd.setText(null);
+    }
+
     private boolean inputValidationLogin() {
-        email=(TextInputEditText)findViewById(R.id.textInputEditTextEmail);
-        pwd=(TextInputEditText)findViewById(R.id.textInputEditTextPassword);
+
 
         String validEmail=email.getText().toString().trim();
         String validPwd=pwd.getText().toString().trim();

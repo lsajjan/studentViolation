@@ -1,10 +1,8 @@
 package com.example.lingarajsajjan.studentviolation;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,8 +16,9 @@ import android.widget.Toast;
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
 import com.example.lingarajsajjan.studentviolation.sql.DatabaseHelper;
 
-public class CreatAccount extends AppCompatActivity {
+public class CreatAccount extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "values";
+    private final AppCompatActivity activity = CreatAccount.this;
     SQLiteDatabase db;
 
     EditText username;
@@ -27,7 +26,7 @@ public class CreatAccount extends AppCompatActivity {
     EditText pwd;
     RadioGroup gender;
     TextView loginbk;
-    Button submitViolation;
+    Button appCompatButtonRegister;
     boolean isemptyCheck=false;
     private DatabaseHelper databaseHelper;
     private UserCreation user;
@@ -41,10 +40,14 @@ public class CreatAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final Context context=CreatAccount.this;
         setContentView(R.layout.activity_creat_account);
+        //getSupportActionBar().hide();
         loginbk=(TextView)findViewById(R.id.appCompatTextViewLoginLink);
-        submitViolation=(Button)findViewById(R.id.appCompatButtonRegister);
+        appCompatButtonRegister=(Button)findViewById(R.id.appCompatButtonRegister);
         userType=(RadioGroup)findViewById(R.id.RadioBtnUserTypeGroup);
         ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
+        user =new UserCreation();
+       // databaseHelper.createTable();
+        databaseHelper =new DatabaseHelper(activity);
 
 
         username=(EditText)findViewById(R.id.textInputEditTextName);
@@ -57,25 +60,26 @@ public class CreatAccount extends AppCompatActivity {
         userRadioBtn = (RadioButton) findViewById(selectedUserId);
         ganderRadioBtn=(RadioButton)findViewById(selectedganderId);
 
+        initListeners();
 
 
-        submitViolation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                inputValidattionNewUser();
-
-            }
-        });
-        loginbk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent loginpage=new Intent(context, MainActivity.class);
-
-                startActivity(loginpage);
-
-            }
-        });
+//        submitViolation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                inputValidattionNewUser();
+//
+//            }
+//        });
+//        loginbk.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent loginpage=new Intent(context, MainActivity.class);
+//
+//                startActivity(loginpage);
+//
+//            }
+//        });
 
     }
 
@@ -85,6 +89,8 @@ public class CreatAccount extends AppCompatActivity {
         String uname=username.getText().toString().trim();
         String uemail=userid.getText().toString().trim();
         String upwd=pwd.getText().toString().trim();
+        String gandner=ganderRadioBtn.getText().toString().trim();
+        String userType=userRadioBtn.getText().toString().trim();
         //Toast.makeText(this,gendarmale,Toast.LENGTH_LONG).show();
 
         if (uname.isEmpty())
@@ -105,22 +111,57 @@ public class CreatAccount extends AppCompatActivity {
 
                 user.setName(uname);
                 user.setEmail(uemail);
-                user.setGendar(ganderRadioBtn.getText().toString().trim());
-                user.setUserType(userRadioBtn.getText().toString().trim());
+                user.setPassword(upwd);
+                //user.setGendar(gandner);
+                user.setUserType(userType);
                 databaseHelper.addUser(user);
 
                 // Snack Bar to show success message that record saved successfully
-                Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
                 //emptyInputEditText();
+                emptyInputEditText();
+                Toast.makeText(this,"New User "+uname+" created SuccessFully..!",Toast.LENGTH_LONG).show();
+
             }
             else {
+                Toast.makeText(this,"User "+uname+" exists already..",Toast.LENGTH_LONG).show();
                 // Snack Bar to show error message that record already exists
-                Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
             }
         }
 
         //return isemptyCheck=true;
     }
 
+    private void emptyInputEditText() {
+        username.setText(null);
+        userid.setText(null);
+        pwd.setText(null);
+        //user.setGendar(gandner);
+        //user.setUserType(userType);
 
+    }
+
+    private void initListeners() {
+
+
+        appCompatButtonRegister.setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.appCompatButtonRegister:
+                //Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show();
+                inputValidattionNewUser();
+                break;
+
+//            case R.id.appCompatTextViewLoginLink:
+//                finish();
+//                break;
+        }
+    }
 }
