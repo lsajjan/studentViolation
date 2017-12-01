@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
+import com.example.lingarajsajjan.studentviolation.model.ViolationRegister;
 
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_USER = "user";
     private static final String TABLE_USERTABLE = "userTable";
 
+    private static final String TABLE_VIOLATION="violation_table";
+
     // User Table Columns names
     private static final String COLUMN_USER_ID = "user_id";
     private static final String COLUMN_USER_NAME = "user_name";
@@ -31,6 +34,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASSWORD = "user_password";
     private static final String COLUMN_USER_GANDER="user_gander";
     private static final String COLUMN_USER_TYPE="user_type";
+//violation table
+    private static final String COLUMN_SQL_USER_ID="sql_user_id";
+    private static final String COLUMN_STD_USER_ID="std_user_id";
+    private static final String COLUMN_STD_USER_NAME = "std_user_name";
+    private static final String COLUMN_VIOLATION_DATE = "violation_date";
+    private static final String COLUMN_VIOLATION_LOCATION = "violation_location";
+    private static final String COLUMN_VIOLATION_LIST="violation_list";
+    private static final String COLUMN_VIOLATION_DESCRP="violation_description";
+    private static final String COLUMN_VIOLATION_STATUS="violation_status";
 
 
     // create table sql quer
@@ -39,8 +51,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_USER_EMAIL + " VARCHAR(25) NOT NULL," + COLUMN_USER_PASSWORD + " VARCHAR(25) NOT NULL,"
             +COLUMN_USER_TYPE+" VARCHAR(25) NOT NULL"+" )";
 
+    //create table violation
+    private String CREATE_VIOLATION_TABLE = "CREATE TABLE " + TABLE_VIOLATION + "("
+            + COLUMN_SQL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_STD_USER_ID + " VARCHAR(25) NOT NULL,"
+            + COLUMN_STD_USER_NAME + " VARCHAR(25) NOT NULL," + COLUMN_VIOLATION_DATE + " VARCHAR(25) NOT NULL,"
+            +COLUMN_VIOLATION_LOCATION+" VARCHAR(50),"+COLUMN_VIOLATION_LIST+" VARCHAR(50),"+COLUMN_VIOLATION_DESCRP+" VARCHAR(50),"
+            +COLUMN_VIOLATION_STATUS+" VARCHAR(20)"+ ")";
+
+
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USERTABLE;
+    private String DROP_VIOLATION_TABLE = "DROP TABLE IF EXISTS " + TABLE_VIOLATION;
 
     /**
      * Constructor
@@ -55,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(CREATE_USER_TABLE_NEW);
+        db.execSQL(CREATE_VIOLATION_TABLE);
     }
 
 //public void createTable(SQLiteDatabase db){
@@ -65,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Drop User Table if exist
         db.execSQL(TABLE_USER);
+        db.execSQL(TABLE_VIOLATION);
 
         // Create tables again
         onCreate(db);
@@ -72,10 +95,116 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * This method is to create violation record
+     *
+     * @param violation
+     */
+    public void submitViolation(ViolationRegister violation) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_STD_USER_ID, violation.getStdId());
+        values.put(COLUMN_STD_USER_NAME, violation.getStdName());
+        values.put(COLUMN_VIOLATION_DATE,violation.getViolationDate());
+        values.put(COLUMN_VIOLATION_LOCATION,violation.getViolationLocation());
+        values.put(COLUMN_VIOLATION_LIST,violation.getViolationType());
+        values.put(COLUMN_VIOLATION_DESCRP,violation.getViolationDescription());
+
+        // Inserting Row
+
+        db.insert(TABLE_VIOLATION, null, values);
+        db.close();
+    }
+    //method get all violation list
+    public List<ViolationRegister> getAllViolations() {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_STD_USER_ID,
+                COLUMN_STD_USER_NAME,
+                COLUMN_VIOLATION_DATE,
+                COLUMN_VIOLATION_LOCATION,
+                COLUMN_VIOLATION_LIST,
+                COLUMN_VIOLATION_DESCRP
+        };
+        // sorting orders
+        String sortOrder =
+                COLUMN_STD_USER_NAME + " ASC";
+        List<ViolationRegister> violationList = new ArrayList<ViolationRegister>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_VIOLATION, //Table to query
+                columns,    //columns to return
+                null,        //columns for the WHERE clause
+                null,        //The values for the WHERE clause
+                null,       //group the rows
+                null,       //filter by row groups
+                sortOrder); //The sort order
+        if (cursor.moveToFirst()) {
+            do {
+
+                ViolationRegister violation=new ViolationRegister();
+                violation.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SQL_USER_ID))));
+                violation.setStdId(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_ID)));
+                violation.setStdName(cursor.getString(cursor.getColumnIndex(COLUMN_STD_USER_NAME)));
+                violation.setViolationDate(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DATE)));
+                violation.setViolationLocation(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LOCATION)));
+                violation.setViolationType(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_LIST)));
+                violation.setViolationDescription(cursor.getString(cursor.getColumnIndex(COLUMN_VIOLATION_DESCRP)));
+                // Adding user record to list
+                violationList.add(violation);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        // return user list
+        return violationList;
+    }
+    /**
+     * This method to check user exist or not
+     *
+     * @param stdId
+     * @return true/false
+     */
+    public boolean checkViolation(String stdId) {
+
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_SQL_USER_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_STD_USER_ID + " = ?";
+
+        // selection argument
+        String[] selectionArgs = {stdId};
+
+        Cursor cursor = db.query(TABLE_VIOLATION, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * This method is to create user record
      *
      * @param user
      */
+
     public void addUser(UserCreation user) {
         SQLiteDatabase db = this.getWritableDatabase();
 

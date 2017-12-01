@@ -97,18 +97,27 @@
                 android:layout_height="wrap_content"
                 android:verticalScrollbarPosition="defaultPosition"
                 android:textColor="@android:color/white"
+                android:id="@+id/checkDresscodeVal"
                 android:text="Dress Code"/>
         <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
+            android:id="@+id/checkLitteringVal"
             android:text="Littering"/>
 
         <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
+            android:id="@+id/checkunpermittedVal"
             android:text="unpermitted group gatherings"/>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:id="@+id/checkOthersVal"
+            android:text="Others"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/violation_description"
