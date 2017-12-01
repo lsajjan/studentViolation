@@ -35,7 +35,7 @@ public class ViolationRecyclerAdapter extends RecyclerView.Adapter<ViolationRecy
         holder.textViewEmail.setText(listUsers.get(position).getStdName());
         //holder.textViewPassword.setText(listUsers.get(position).getViolationDescription());
         holder.textViewViolationDate.setText(listUsers.get(position).getViolationDate());
-        holder.textViewViolationType.setText(listUsers.get(position).getViolationType());
+        holder.textViewViolationType.setText(listUsers.get(position).getViolationDescription());
         holder.textViewViolationLocation.setText(listUsers.get(position).getViolationLocation());
 
     }

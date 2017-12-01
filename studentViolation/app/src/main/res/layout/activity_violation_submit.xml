@@ -78,7 +78,7 @@
             android:layout_height="fill_parent"
             android:layout_width="wrap_content"
             android:id="@+id/locationTxt"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/holo_red_light"
             android:maxLines="4"
             android:lines="4"
              />

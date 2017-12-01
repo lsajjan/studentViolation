@@ -14,6 +14,15 @@ public class ViolationRegister {
     private String violationDate;
     private String violationDescription;
 
+    public String getViolationStatus() {
+        return violationStatus;
+    }
+
+    public void setViolationStatus(String violationStatus) {
+        this.violationStatus = violationStatus;
+    }
+
+    private String violationStatus;
     public int getId() {
         return id;
     }

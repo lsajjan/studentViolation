@@ -1,6 +1,7 @@
 package com.example.lingarajsajjan.studentviolation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +19,7 @@ public class UserProfileView extends AppCompatActivity {
     TextView nameUpdate,idUpdate,pwdUpdate;
     DatabaseHelper databaseHelper;
     UserCreation user;
-    Button updateBtn;
+    Button updateBtn,updateCancelBtn;
     int id;
     String stdId;
     private final AppCompatActivity activity = UserProfileView.this;
@@ -32,6 +33,7 @@ public class UserProfileView extends AppCompatActivity {
         idUpdate=(TextView)findViewById(R.id.textInputEditTextEmailUpdate);
         pwdUpdate=(TextView)findViewById(R.id.textInputEditTextPasswordUpdate);
         updateBtn=(Button)findViewById(R.id.appCompatButtonRegisterUpdate);
+        updateCancelBtn=(Button)findViewById(R.id.appCompatButtonRegisterUpdateCancel);
         databaseHelper=new DatabaseHelper(activity);
         user=new UserCreation();
         Bundle extras = getIntent().getExtras();
@@ -51,7 +53,13 @@ public class UserProfileView extends AppCompatActivity {
 
             }
         });
-
+        updateCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dabboardpagBk=new Intent(context,DashboardOptions.class);
+                startActivity(dabboardpagBk);
+            }
+        });
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);

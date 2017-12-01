@@ -76,6 +76,13 @@
             android:layout_marginTop="20dp"
             android:background="@color/colorTextHint"
             android:text="Update Profile" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/appCompatButtonRegisterUpdateCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorTextHint"
+            android:text="Cancel " />
 
 
     </android.support.v7.widget.LinearLayoutCompat>

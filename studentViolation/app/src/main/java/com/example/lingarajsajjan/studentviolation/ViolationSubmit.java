@@ -94,11 +94,13 @@ public class ViolationSubmit extends AppCompatActivity {
                 Toast.makeText(this, checkVal, Toast.LENGTH_LONG).show();
             }
         }
+
         violation.setStdId(stdid);
         violation.setStdName(stdname);
         violation.setViolationDescription(violationDescr);
         violation.setViolationDate(violationDate);
         violation.setViolationLocation(stdlocation);
+        violation.setViolationStatus("Submitted");
        // Toast.makeText(this, checkVal, Toast.LENGTH_LONG).show();
         // stdlocation=currentLocation.getText().toString().trim();
 
@@ -110,18 +112,31 @@ public class ViolationSubmit extends AppCompatActivity {
         else if(!(others.isChecked() || dresscode.isChecked() || unpermitted.isChecked() || littering.isChecked())){
             Toast.makeText(this, "Select Violation Type missing", Toast.LENGTH_LONG).show();
         }
+        else if (violationDescr.isEmpty()) {
+            Toast.makeText(this, "Violation Description missing", Toast.LENGTH_LONG).show();
+        }
+
         else {
             if (!databaseHelper.checkViolation(stdid)) {
 
                 databaseHelper.submitViolation(violation);
-
-                Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+                inputEmpty();
+                Toast.makeText(this, "Successfully Registered Violation", Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(this, "Failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Same Student Id not allowed", Toast.LENGTH_LONG).show();
             }
         }
     }
+
+    private void inputEmpty() {
+
+        stdId.setText(null);
+        stdName.setText(null);
+        violationDes.setText(null);
+        currentLocation.setText(null);
+    }
+
     private void getCurrentDate() {
         showTimeStamp=(TextView)findViewById(R.id.storeDateTime);
 
