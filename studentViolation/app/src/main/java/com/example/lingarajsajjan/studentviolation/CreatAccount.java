@@ -8,10 +8,12 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
@@ -34,6 +36,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
     RadioGroup ganarGroup;
     RadioGroup userType;
     RadioButton userRadioBtn,ganderRadioBtn;
+    Spinner spin, campusSpin;
     private NestedScrollView nestedScrollView;
     @Override
 
@@ -45,8 +48,13 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         appCompatTextViewLoginLink=(AppCompatTextView)findViewById(R.id.appCompatTextViewLoginLink);
         appCompatButtonRegister=(Button)findViewById(R.id.appCompatButtonRegister);
        // appCompatTextViewLoginLink=(Button)findViewById(R.id.appCompatTextViewLoginLink);
-        userType=(RadioGroup)findViewById(R.id.RadioBtnUserTypeGroup);
-        ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
+       // userType=(RadioGroup)findViewById(R.id.RadioBtnUserTypeGroup);
+        //ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
+        spin=(Spinner)findViewById(R.id.user_type);
+        campusSpin=(Spinner)findViewById(R.id.student_campus) ;
+
+        spin.setSelection(0);
+       // campusSpin.setVisibility(view.GONE);
         user =new UserCreation();
        // databaseHelper.createTable();
         databaseHelper =new DatabaseHelper(activity);
@@ -55,12 +63,12 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         username=(EditText)findViewById(R.id.textInputEditTextName);
         userid=(EditText)findViewById(R.id.textInputEditTextEmail);
         pwd=(EditText)findViewById(R.id.textInputEditTextPassword);
-        int selectedUserId = userType.getCheckedRadioButtonId();
-        int selectedganderId=ganarGroup.getCheckedRadioButtonId();
+        //int selectedUserId = userType.getCheckedRadioButtonId();
+       // int selectedganderId=ganarGroup.getCheckedRadioButtonId();
 
         // find the radiobutton by returned id
-        userRadioBtn = (RadioButton) findViewById(selectedUserId);
-        ganderRadioBtn=(RadioButton)findViewById(selectedganderId);
+       // userRadioBtn = (RadioButton) findViewById(selectedUserId);
+        //ganderRadioBtn=(RadioButton)findViewById(selectedganderId);
 
         //initListeners();
         //Intent loginBk=new Intent(activity,MainActivity.class);
@@ -68,6 +76,34 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
 
 
 
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                String Text = spin.getSelectedItem().toString();
+
+                if(position != 1)
+                    campusSpin.setVisibility(View.GONE);
+                else
+                    campusSpin.setVisibility(View.VISIBLE);
+
+//                if(Text=="SELECT USER TYPE"){
+//
+//                    campusSpin.setVisibility(view.VISIBLE);
+//
+//                }
+//                else
+//                {
+//                    campusSpin.setVisibility(view.S);
+//                }
+                Toast.makeText(context,Text,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         appCompatButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

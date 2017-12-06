@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASSWORD = "user_password";
     private static final String COLUMN_USER_GANDER="user_gander";
     private static final String COLUMN_USER_TYPE="user_type";
-//violation table
+    //violation table
     private static final String COLUMN_SQL_USER_ID="sql_user_id";
     private static final String COLUMN_STD_USER_ID="std_user_id";
     private static final String COLUMN_STD_USER_NAME = "std_user_name";

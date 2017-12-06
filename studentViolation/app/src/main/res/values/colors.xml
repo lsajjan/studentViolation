@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#51d8c7</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorBackground">#413e4f</color>
-    <color name="colorText">#FFFFFF</color>
+    <color name="colorText">#ffffff</color>
     <color name="colorTextHint">#6495ED</color>
 <!--geet location method color-->
 <color name="primary_text">#212121</color>
@@ -12,6 +12,6 @@
 
 <color name="proceed_disable">#DEDEDE</color>
 <color name="proceed_enable">#72D63A</color>
-<color name="colorWhite">#FFFFFF</color>
+<color name="colorWhite">#ffffff</color>
 </resources>
 

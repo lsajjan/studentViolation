@@ -9,6 +9,12 @@
         <item>Hostel</item>
         <item>Others</item>
     </string-array>
+    <string-array name="student_campus">
+        <item>SELECT CAMPUS</item>
+        <item>Main Campus</item>
+        <item>Sas AlNakhl Campus</item>
+        <item>Masdar Campus</item>
+    </string-array>
     <string-array name="voilation_Type">
         <item>Dress Code</item>
         <item>Littering</item>
@@ -16,9 +22,10 @@
         <item>Others</item>
     </string-array>
     <string-array name="user_Type">
+        <item>SELECT USER TYPE</item>
         <item>Student</item>
         <item>Security</item>
-        <item>Others</item>
+
     </string-array>
 
 

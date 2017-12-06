@@ -21,7 +21,9 @@
 
     <!--get location style-->
     <!-- Base application theme. -->
-
+    <style name="spinnerTheme" parent="android:Theme">
+        <item name="android:textColor">#000000</item>
+    </style>
 
     <!--Used to remove the actionbar elevation-->
 
