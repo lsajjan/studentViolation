@@ -1,9 +1,14 @@
 package com.example.lingarajsajjan.studentviolation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
@@ -11,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -18,6 +24,10 @@ import android.widget.Toast;
 
 import com.example.lingarajsajjan.studentviolation.model.UserCreation;
 import com.example.lingarajsajjan.studentviolation.sql.DatabaseHelper;
+
+import java.io.ByteArrayOutputStream;
+
+// imported for take photo method
 
 public class CreatAccount extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "values";
@@ -29,7 +39,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
     EditText pwd;
     RadioGroup gender;
     AppCompatTextView appCompatTextViewLoginLink;
-    Button appCompatButtonRegister;
+    Button appCompatButtonRegister,takepic;
     boolean isemptyCheck=false;
     private DatabaseHelper databaseHelper;
     private UserCreation user;
@@ -37,6 +47,8 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
     RadioGroup userType;
     RadioButton userRadioBtn,ganderRadioBtn;
     Spinner spin, campusSpin;
+    private static final int CAMERA_REQUEST = 1888;
+    ImageView imageView;
     private NestedScrollView nestedScrollView;
     @Override
 
@@ -44,7 +56,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         final Context context=CreatAccount.this;
         setContentView(R.layout.activity_creat_account);
-        //getSupportActionBar().hide();
+
         appCompatTextViewLoginLink=(AppCompatTextView)findViewById(R.id.appCompatTextViewLoginLink);
         appCompatButtonRegister=(Button)findViewById(R.id.appCompatButtonRegister);
        // appCompatTextViewLoginLink=(Button)findViewById(R.id.appCompatTextViewLoginLink);
@@ -52,29 +64,22 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         //ganarGroup=(RadioGroup)findViewById(R.id.RadioBtnGanerGroup);
         spin=(Spinner)findViewById(R.id.user_type);
         campusSpin=(Spinner)findViewById(R.id.student_campus) ;
-
+        takepic=(Button)findViewById(R.id.take_photo);
+        imageView=(ImageView) findViewById(R.id.display_img);
         spin.setSelection(0);
-       // campusSpin.setVisibility(view.GONE);
-        user =new UserCreation();
-       // databaseHelper.createTable();
+        user =new UserCreation();// databaseHelper.createTable();
         databaseHelper =new DatabaseHelper(activity);
-
-
         username=(EditText)findViewById(R.id.textInputEditTextName);
         userid=(EditText)findViewById(R.id.textInputEditTextEmail);
         pwd=(EditText)findViewById(R.id.textInputEditTextPassword);
-        //int selectedUserId = userType.getCheckedRadioButtonId();
-       // int selectedganderId=ganarGroup.getCheckedRadioButtonId();
 
-        // find the radiobutton by returned id
-       // userRadioBtn = (RadioButton) findViewById(selectedUserId);
-        //ganderRadioBtn=(RadioButton)findViewById(selectedganderId);
-
-        //initListeners();
-        //Intent loginBk=new Intent(activity,MainActivity.class);
-        //startActivity(loginBk);
-
-
+        takepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -87,16 +92,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
                 else
                     campusSpin.setVisibility(View.VISIBLE);
 
-//                if(Text=="SELECT USER TYPE"){
-//
-//                    campusSpin.setVisibility(view.VISIBLE);
-//
-//                }
-//                else
-//                {
-//                    campusSpin.setVisibility(view.S);
-//                }
-                Toast.makeText(context,Text,Toast.LENGTH_LONG).show();
+
             }
 
             @Override
@@ -123,6 +119,36 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            String uri=data.
+           // System.out.println("tempUri---->"+uri);
+            //Toast.makeText(this,uri,Toast.LENGTH_LONG).show();
+           // Bitmap path=(Bitmap)data.getExtras();
+           // imageView.setImageBitmap(photo);
+            // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+           // Uri tempUri = getImageUri(getApplicationContext(), photo);
+            //System.out.println("tempUri---->"+tempUri);
+            // CALL THIS METHOD TO GET THE ACTUAL PATH
+            //File finalFile = new File(getRealPathFromURI(tempUri));
+
+            //System.out.println("mmlkl---->"+finalFile);
+        }
+    }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 
     private void inputValidattionNewUser() {

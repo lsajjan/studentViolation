@@ -32,6 +32,22 @@
                 android:textAlignment="center" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutcampus_Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/white"
+            android:layout_marginTop="10dp">
+
+            <Spinner
+                android:id="@+id/student_campus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/spinnerTheme"
+                android:entries="@array/student_campus"
+                android:textAlignment="center" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,23 +133,21 @@
                 android:text="Female"/>
 
         </RadioGroup>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutcampus_Spinner"
-            android:layout_width="match_parent"
+        <Button android:id="@+id/take_photo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColorHint="@android:color/white"
-            android:layout_marginTop="20dp">
+            android:text="Take Profile Photo"
+            android:layout_marginTop="0dp">
+        </Button>
+        <ImageView android:id="@+id/display_img"
+            android:layout_height="150dp"
+            android:src="@drawable/bg_cta_button"
+            android:layout_width="180dp"
+            android:layout_gravity="center"
+            >
+        </ImageView>
 
-            <Spinner
-                android:id="@+id/student_campus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:theme="@style/spinnerTheme"
-                android:entries="@array/student_campus"
-                android:textAlignment="center" />
-        </android.support.design.widget.TextInputLayout>
+
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonRegister"
