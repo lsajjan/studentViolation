@@ -15,8 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutStdName"
             android:layout_width="match_parent"
@@ -82,42 +80,23 @@
             android:maxLines="4"
             android:lines="4"
              />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/violation_type"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutviolation_typeSpinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:text="Violation Type"
-            android:textSize="16dp" />
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
+            android:textColorHint="@android:color/white"
+            android:layout_marginTop="20dp">
+
+            <Spinner
+                android:id="@+id/violation_type"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:verticalScrollbarPosition="defaultPosition"
-                android:textColor="@android:color/white"
-                android:id="@+id/checkDresscodeVal"
-                android:text="Dress Code"/>
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/checkLitteringVal"
-            android:text="Littering"/>
+                android:layout_weight="1"
+                android:theme="@style/spinnerTheme"
+                android:entries="@array/voilation_Type"
+                android:textAlignment="center" />
+        </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/checkunpermittedVal"
-            android:text="unpermitted group gatherings"/>
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/checkOthersVal"
-            android:text="Others"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/violation_description"
@@ -135,6 +114,18 @@
                 android:maxLines="1"
                 android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
+        <Button android:id="@+id/take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Photo"
+            android:layout_marginTop="0dp">
+        </Button>
+        <ImageView android:id="@+id/display_img"
+            android:layout_height="150dp"
+            android:src="@drawable/bg_cta_button"
+            android:layout_width="230dp"
+            android:layout_gravity="center">
+        </ImageView>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonRegisterViolation"

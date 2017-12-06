@@ -143,8 +143,7 @@
             android:layout_height="150dp"
             android:src="@drawable/bg_cta_button"
             android:layout_width="180dp"
-            android:layout_gravity="center"
-            >
+            android:layout_gravity="center">
         </ImageView>
 
 

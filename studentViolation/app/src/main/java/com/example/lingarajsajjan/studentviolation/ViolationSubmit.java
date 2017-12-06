@@ -1,13 +1,18 @@
 package com.example.lingarajsajjan.studentviolation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,18 +20,19 @@ import com.example.lingarajsajjan.studentviolation.model.ViolationRegister;
 import com.example.lingarajsajjan.studentviolation.sql.DatabaseHelper;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ViolationSubmit extends AppCompatActivity {
+    private static final int CAMERA_REQUEST = 1888;
     TextView showTimeStamp,currentLocation;
     EditText stdName,stdId,currentDate,violationDes;
     Button submitviolation;
-    Button getlocationPage;
+    Button getlocationPage,takepic;
     CheckBox dresscode,littering,others,unpermitted;
     private DatabaseHelper databaseHelper;
     private ViolationRegister violation;
+    Spinner violationspin;
+    ImageView imageView;
     private final AppCompatActivity activity = ViolationSubmit.this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +48,18 @@ public class ViolationSubmit extends AppCompatActivity {
         violationDes=(EditText)findViewById(R.id.violation_descriptiontxt);
         submitviolation=(Button)findViewById(R.id.appCompatButtonRegisterViolation);
         getlocationPage=(Button)findViewById(R.id.getlocationBtn);
-        dresscode=(CheckBox)findViewById(R.id.checkDresscodeVal);
-        littering=(CheckBox)findViewById(R.id.checkLitteringVal);
-        unpermitted=(CheckBox)findViewById(R.id.checkunpermittedVal);
-        others=(CheckBox)findViewById(R.id.checkOthersVal);
-
+       // spin=(Spinner)findViewById(R.id.user_type);
+        violationspin=(Spinner)findViewById(R.id.user_type);
+        imageView=(ImageView) findViewById(R.id.display_img);
+        takepic=(Button)findViewById(R.id.take_photo);
+        //violationspin.setSelection(0);
+        takepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
 
         currentLocation.setText(getIntent().getStringExtra("Currentlocation"));
         getlocationPage.setOnClickListener(new View.OnClickListener() {
@@ -67,15 +80,18 @@ public class ViolationSubmit extends AppCompatActivity {
 
         getCurrentDate();
 
-        String dateStr = "04/05/2010";
-
-       // Toast.makeText(this,currentDateTimeString,Toast.LENGTH_LONG).show();
-
-//        String newDateStr = postFormater.format(dateObj);
-//
-        //showTimeStamp.setText(currentDateTimeString);
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            Uri u = data.getData();
 
+            System.out.println("tempUri---->"+u);
+
+            imageView.setImageBitmap(photo);
+
+        }
+    }
     private void inputValidViolationSubmit() {
 
         String stdname, stdid, stdlocation, violationDescr, violationDate,checkVal;
@@ -86,15 +102,6 @@ public class ViolationSubmit extends AppCompatActivity {
         violationDescr = violationDes.getText().toString().trim();
         databaseHelper = new DatabaseHelper(activity);
         violation = new ViolationRegister();
-        List<CheckBox> items = new ArrayList<CheckBox>();
-        for (CheckBox item : items) {
-            if (item.isChecked()) {
-                checkVal = item.getText().toString().trim();
-                violation.setViolationType(checkVal);
-                Toast.makeText(this, checkVal, Toast.LENGTH_LONG).show();
-            }
-        }
-
         violation.setStdId(stdid);
         violation.setStdName(stdname);
         violation.setViolationDescription(violationDescr);
@@ -109,9 +116,7 @@ public class ViolationSubmit extends AppCompatActivity {
         } else if (stdid.isEmpty()) {
             Toast.makeText(this, "Student Id is missing", Toast.LENGTH_LONG).show();
         }
-        else if(!(others.isChecked() || dresscode.isChecked() || unpermitted.isChecked() || littering.isChecked())){
-            Toast.makeText(this, "Select Violation Type missing", Toast.LENGTH_LONG).show();
-        }
+
         else if (violationDescr.isEmpty()) {
             Toast.makeText(this, "Violation Description missing", Toast.LENGTH_LONG).show();
         }

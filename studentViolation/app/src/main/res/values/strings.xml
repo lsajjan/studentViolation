@@ -16,6 +16,7 @@
         <item>Masdar Campus</item>
     </string-array>
     <string-array name="voilation_Type">
+        <item>SELECT VIOLATION TYPE</item>
         <item>Dress Code</item>
         <item>Littering</item>
         <item>Parking Violation</item>

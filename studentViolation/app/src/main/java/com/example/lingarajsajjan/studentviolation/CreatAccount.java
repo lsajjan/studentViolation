@@ -123,11 +123,13 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            String uri=data.
-           // System.out.println("tempUri---->"+uri);
-            //Toast.makeText(this,uri,Toast.LENGTH_LONG).show();
+            Uri u = data.getData();
+
+            //String uri=data.
+            System.out.println("tempUri---->"+u);
+          //  Toast.makeText(this, u,Toast.LENGTH_LONG).show();
            // Bitmap path=(Bitmap)data.getExtras();
-           // imageView.setImageBitmap(photo);
+            imageView.setImageBitmap(photo);
             // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
            // Uri tempUri = getImageUri(getApplicationContext(), photo);
             //System.out.println("tempUri---->"+tempUri);
@@ -157,8 +159,8 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
         String uname=username.getText().toString().trim();
         String uemail=userid.getText().toString().trim();
         String upwd=pwd.getText().toString().trim();
-        String gandner=ganderRadioBtn.getText().toString().trim();
-        String userType=userRadioBtn.getText().toString().trim();
+       // String gandner=ganderRadioBtn.getText().toString().trim();
+        //String userType=userRadioBtn.getText().toString().trim();
         //Toast.makeText(this,gendarmale,Toast.LENGTH_LONG).show();
 
         if (uname.isEmpty())
@@ -181,7 +183,7 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
                 user.setEmail(uemail);
                 user.setPassword(upwd);
                 //user.setGendar(gandner);
-                user.setUserType(userType);
+                user.setUserType("student");
                 databaseHelper.addUser(user);
 
                 // Snack Bar to show success message that record saved successfully
