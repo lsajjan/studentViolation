@@ -191,7 +191,8 @@ public class CreatAccount extends AppCompatActivity implements View.OnClickListe
                 //emptyInputEditText();
                 emptyInputEditText();
                 Toast.makeText(this,"New User "+uname+" created SuccessFully..!",Toast.LENGTH_LONG).show();
-
+                Intent loginpage=new Intent(this, MainActivity.class);
+                startActivity(loginpage);
             }
             else {
                 Toast.makeText(this,"User "+uname+" exists already..",Toast.LENGTH_LONG).show();
